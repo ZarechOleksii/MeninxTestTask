@@ -281,6 +281,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DeleteBook.aspx" />
+    <Content Include="EditBook.aspx" />
     <Content Include="CreateNew.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -329,6 +331,20 @@
     <Compile Include="App_Start\PreStart.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServiceProvider.cs" />
+    <Compile Include="DeleteBook.aspx.cs">
+      <DependentUpon>DeleteBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteBook.aspx.designer.cs">
+      <DependentUpon>DeleteBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditBook.aspx.cs">
+      <DependentUpon>EditBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditBook.aspx.designer.cs">
+      <DependentUpon>EditBook.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CreateNew.aspx.cs">
       <DependentUpon>CreateNew.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

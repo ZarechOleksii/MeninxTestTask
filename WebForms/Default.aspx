@@ -11,6 +11,7 @@
                 <th>ISBN</th>
                 <th>PublicationYear</th>
                 <th>Quantity</th>
+                <th>Edit</th>
             </tr>
 
             <asp:Repeater ID="tableRows" runat="server">
@@ -21,6 +22,8 @@
                         <td><%# Eval("ISBN") %></td>
                         <td><%# Eval("PublicationYear") %></td>
                         <td><%# Eval("Quantity") %></td>
+                        <td><a href="EditBook.aspx?BookId=<%# Eval("Id") %>">Edit</a></td>
+                        <td><a href="DeleteBook.aspx?BookId=<%# Eval("Id") %>">Delete</a></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>

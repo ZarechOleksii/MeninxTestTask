@@ -8,7 +8,9 @@ namespace DAL.Interfaces
 {
     public interface IBookRepository : IRepository<Book>
     {
-        Task<Book> GetOneAsync(Guid id);
+        Book GetOne(Guid id);
+
+        Book GetOneWithCategory(Guid id);
 
         Task<IEnumerable<Book>> GetAllAsync(int take, int offset, string search, SortOrder sortOrder);
     }
