@@ -18,7 +18,7 @@ namespace DAL
                 .HasIndex(q => q.ISBN)
                 .IsUnique();
 
-            Guid categoryGuid = Guid.NewGuid();
+            Guid categoryGuid = Guid.Parse("1f4494ff-8bb8-4967-9350-c9c4a8d7d697");
 
             modelBuilder.Entity<Category>().HasData(
                 new Category
@@ -38,7 +38,7 @@ namespace DAL
             modelBuilder.Entity<Book>().HasData(
                 new Book
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("cc49ae9a-c1a2-4226-a5a4-5627646afaf2"),
                     Title = "Scary story",
                     Author = "Old vampire",
                     PublicationYear = 2004,

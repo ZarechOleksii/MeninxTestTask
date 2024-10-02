@@ -12,6 +12,10 @@ namespace DAL.Interfaces
 
         Book GetOneWithCategory(Guid id);
 
+        Task<Book> GetOneAsync(Guid id);
+
+        Task<bool> BookExists(Guid id);
+
         bool IsISBNAvailable(string ISBN);
 
         Task<IEnumerable<Book>> GetAllAsync(int take, int offset, string search, SortOrder sortOrder);

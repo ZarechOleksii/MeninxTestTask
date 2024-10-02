@@ -13,5 +13,7 @@ namespace DAL.Interfaces
         bool Delete(T obj);
 
         bool Update(T obj);
+
+        bool UpdateUntracked(T obj);
     }
 }

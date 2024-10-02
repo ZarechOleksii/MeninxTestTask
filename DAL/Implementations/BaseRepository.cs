@@ -60,5 +60,10 @@ namespace DAL.Implementations
         {
             return SaveChangesLogExceptionWrapper(() => dbContext.Set<T>().Update(obj));
         }
+
+        public virtual bool UpdateUntracked(T obj)
+        {
+            return SaveChangesLogExceptionWrapper(() => dbContext.Entry(obj).State = EntityState.Modified);
+        }
     }
 }

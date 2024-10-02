@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Implementations
 {
-    public class BookRepository : BaseRepository<Book>, IBookRepository 
+    public class BookRepository : BaseRepository<Book>, IBookRepository
     {
         public BookRepository(LibraryDBContext context, ILogger<BookRepository> logger) : base(context, logger) { }
 
@@ -18,6 +18,17 @@ namespace DAL.Implementations
         {
             return dbContext.Books.Find(id);
         }
+
+        public async Task<Book> GetOneAsync(Guid id)
+        {
+            return await dbContext.Books.FindAsync(id);
+        }
+
+        public async Task<bool> BookExists(Guid id)
+        {
+            return await dbContext.Books.AnyAsync(q => q.Id == id);
+        }
+
         public Book GetOneWithCategory(Guid id)
         {
             return dbContext.Books.Include(q => q.Category).FirstOrDefault(q => q.Id == id);

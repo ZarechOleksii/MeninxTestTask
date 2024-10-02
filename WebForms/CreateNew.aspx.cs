@@ -48,8 +48,8 @@ namespace WebForms
 
         protected void BookValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            Book book = new Book 
-            { 
+            Book book = new Book
+            {
                 Title = BookTitle.Text,
                 Author = BookAuthor.Text,
                 ISBN = BookISBN.Text,
@@ -58,7 +58,7 @@ namespace WebForms
 
             List<ValidationResult> validationResults = new List<ValidationResult>();
 
-            if(int.TryParse(BookYear.Text, out int year))
+            if (int.TryParse(BookYear.Text, out int year))
             {
                 book.PublicationYear = year;
             }

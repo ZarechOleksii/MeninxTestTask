@@ -12,6 +12,7 @@
                 <th>PublicationYear</th>
                 <th>Quantity</th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
 
             <asp:Repeater ID="tableRows" runat="server">

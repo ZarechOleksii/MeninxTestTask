@@ -88,7 +88,7 @@ namespace WebForms
 
             List<ValidationResult> validationResults = new List<ValidationResult>();
 
-            if(int.TryParse(BookYear.Text, out int year))
+            if (int.TryParse(BookYear.Text, out int year))
             {
                 editedBook.PublicationYear = year;
             }
