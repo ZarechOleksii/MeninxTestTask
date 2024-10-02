@@ -34,12 +34,14 @@ namespace WebForms
 
             HttpRuntime.WebObjectActivator = new ServiceProviderWrapper(serviceProvider);
 
+            #if DEBUG
             using (var serviceScope = HttpRuntime.WebObjectActivator.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<LibraryDBContext>();
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
             }
+            #endif
         }
     }
 }
