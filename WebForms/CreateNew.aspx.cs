@@ -76,9 +76,16 @@ namespace WebForms
                 validationResults.Add(new ValidationResult("Quantity is not a valid number"));
             }
 
+            if (!_bookRep.IsISBNAvailable(book.ISBN))
+            {
+                validationResults.Add(new ValidationResult("This ISBN is already present"));
+            }
+
             ValidationContext context = new ValidationContext(book);
 
-            bool isValid = Validator.TryValidateObject(book, context, validationResults, true);
+            Validator.TryValidateObject(book, context, validationResults, true);
+
+            bool isValid = !validationResults.Any();
 
             args.IsValid = isValid;
 

@@ -84,7 +84,6 @@ namespace WebForms
         {
             editedBook.Title = BookTitle.Text;
             editedBook.Author = BookAuthor.Text;
-            editedBook.ISBN = BookISBN.Text;
             editedBook.CategoryId = _categories.ElementAt(BookCategory.SelectedIndex).Id;
 
             List<ValidationResult> validationResults = new List<ValidationResult>();
@@ -107,9 +106,20 @@ namespace WebForms
                 validationResults.Add(new ValidationResult("Quantity is not a valid number"));
             }
 
+            if (BookISBN.Text != editedBook.ISBN && !_bookRep.IsISBNAvailable(BookISBN.Text))
+            {
+                validationResults.Add(new ValidationResult("This ISBN is already present"));
+            }
+            else
+            {
+                editedBook.ISBN = BookISBN.Text;
+            }
+
             ValidationContext context = new ValidationContext(editedBook);
 
-            bool isValid = Validator.TryValidateObject(editedBook, context, validationResults, true);
+            Validator.TryValidateObject(editedBook, context, validationResults, true);
+
+            bool isValid = !validationResults.Any();
 
             args.IsValid = isValid;
 
