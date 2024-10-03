@@ -19,18 +19,16 @@ namespace WebForms.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetBooksAsync()
+        public async Task<IHttpActionResult> GetBooksAsync(
+            [FromUri] int take = 10,
+            [FromUri] int offset = 0,
+            [FromUri] string search = "",
+            [FromUri] string orderColumn = "",
+            [FromUri] string orderDirection = "")
         {
-            return Ok(await _bookRepository.GetAllNoTrackingAsync());
+            return Ok(await _bookRepository.GetAllAsync(take, offset, search, orderColumn, orderDirection));
         }
 
-        /*
-        [HttpGet]
-        public async Task<IHttpActionResult> GetBooksAsync()
-        {
-            return Ok(await _bookRepository.GetAllAsync(5, 0, "", System.Data.SqlClient.SortOrder.Descending));
-        }
-        */
         [HttpGet]
         public async Task<IHttpActionResult> GetBook([FromUri] Guid id)
         {

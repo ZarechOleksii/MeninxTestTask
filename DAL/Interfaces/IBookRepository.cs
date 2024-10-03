@@ -18,6 +18,6 @@ namespace DAL.Interfaces
 
         bool IsISBNAvailable(string ISBN);
 
-        Task<IEnumerable<Book>> GetAllAsync(int take, int offset, string search, SortOrder sortOrder);
+        Task<IEnumerable<Book>> GetAllAsync(int take, int offset, string search, string sortColumn, string sortDirection);
     }
 }

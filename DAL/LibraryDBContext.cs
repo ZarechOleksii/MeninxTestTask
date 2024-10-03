@@ -1,16 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
 using System;
+using System.Configuration;
 
 namespace DAL
 {
     public class LibraryDBContext : DbContext
     {
+        public LibraryDBContext() : base() { }
+
         public LibraryDBContext(DbContextOptions<LibraryDBContext> options) : base(options) { }
 
         public DbSet<Book> Books { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DBLocalConnection"].ConnectionString);
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
