@@ -52,7 +52,7 @@ namespace WebForms.Controllers
                     ModelState.AddModelError($"{nameof(book)}.{nameof(book.ISBN)}", "ISBN already present");
                 }
 
-                if (book.Id != Guid.Empty && await _bookRepository.BookExists(book.Id))
+                if (book.Id != Guid.Empty && await _bookRepository.BookExistsAsync(book.Id))
                 {
                     ModelState.AddModelError($"{nameof(book)}.{nameof(book.Id)}", "Id already present");
                 }
@@ -83,7 +83,7 @@ namespace WebForms.Controllers
 
             if (ModelState.IsValid)
             {
-                bool exists = await _bookRepository.BookExists(id);
+                bool exists = await _bookRepository.BookExistsAsync(id);
 
                 if (!exists)
                 {

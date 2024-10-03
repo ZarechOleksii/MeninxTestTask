@@ -25,7 +25,7 @@ namespace DAL.Implementations
             return await dbContext.Books.FindAsync(id);
         }
 
-        public async Task<bool> BookExists(Guid id)
+        public async Task<bool> BookExistsAsync(Guid id)
         {
             return await dbContext.Books.AnyAsync(q => q.Id == id);
         }

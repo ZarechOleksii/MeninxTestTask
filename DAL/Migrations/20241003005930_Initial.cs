@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 using System.IO;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
@@ -75,10 +75,10 @@ namespace DAL.Migrations
                 column: "ISBN",
                 unique: true);
 
-            string procedureFilePath = 
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, 
-                    AppDomain.CurrentDomain.RelativeSearchPath, 
-                    "Scripts", 
+            string procedureFilePath =
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                    AppDomain.CurrentDomain.RelativeSearchPath,
+                    "Scripts",
                     "GetBooksProcedure.sql");
 
             migrationBuilder.Sql(File.ReadAllText(procedureFilePath));
