@@ -19,7 +19,7 @@ namespace DAL.Implementations
             log = logger;
         }
 
-        protected bool SaveChangesLogExceptionWrapper(Action action)
+        public bool SaveChangesLogExceptionWrapper(Action action)
         {
             try
             {

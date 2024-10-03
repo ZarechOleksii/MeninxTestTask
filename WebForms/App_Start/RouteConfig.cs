@@ -6,6 +6,8 @@ namespace WebForms
 {
     public static class RouteConfig
     {
+        public const string RouteName = "DefaultApi";
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             var settings = new FriendlyUrlSettings();

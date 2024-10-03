@@ -3,10 +3,10 @@ using DAL.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.Linq;
 using Models;
+using Moq;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Tests.DAL
@@ -14,8 +14,9 @@ namespace Tests.DAL
     [TestClass]
     public class CategoryRepositoryTests
     {
-        private readonly LibraryDBContext libraryDBContext;
-        private readonly Mock<ILogger<CategoryRepository>> loggerMock;
+        private readonly LibraryDBContext _libraryDBContext;
+        private readonly Mock<ILogger<CategoryRepository>> _loggerMock;
+        private readonly CategoryRepository _categoryRepository;
 
         public CategoryRepositoryTests()
         {
@@ -23,8 +24,9 @@ namespace Tests.DAL
                 .UseInMemoryDatabase("Meninx")
                 .Options;
 
-            libraryDBContext = new LibraryDBContext(options);
-            loggerMock = new Mock<ILogger<CategoryRepository>>();
+            _libraryDBContext = new LibraryDBContext(options);
+            _loggerMock = new Mock<ILogger<CategoryRepository>>();
+            _categoryRepository = new CategoryRepository(_libraryDBContext, _loggerMock.Object);
         }
 
         [TestMethod]
@@ -35,14 +37,13 @@ namespace Tests.DAL
             const string name2 = "SomeName2";
             const string name3 = "SomeName3";
 
-            libraryDBContext.Categories.Add(new Category() { Name = name3, Description = "Description1" });
-            libraryDBContext.Categories.Add(new Category() { Name = name2, Description = "Description2" });
-            libraryDBContext.Categories.Add(new Category() { Name = name1, Description = "Description3" });
-            libraryDBContext.SaveChanges();
-            CategoryRepository rep = new CategoryRepository(libraryDBContext, loggerMock.Object);
+            _libraryDBContext.Categories.Add(new Category() { Name = name3, Description = "Description1" });
+            _libraryDBContext.Categories.Add(new Category() { Name = name2, Description = "Description2" });
+            _libraryDBContext.Categories.Add(new Category() { Name = name1, Description = "Description3" });
+            _libraryDBContext.SaveChanges();
 
             //act
-            var result = rep.GetAllNoTracking();
+            var result = _categoryRepository.GetAllNoTracking();
 
             //assert
             Assert.AreEqual(3, result.Count());
@@ -54,11 +55,8 @@ namespace Tests.DAL
         [TestMethod]
         public async Task GetOneAsync_NotFound_ReturnsNull()
         {
-            //arrange
-            CategoryRepository rep = new CategoryRepository(libraryDBContext, loggerMock.Object);
-
             //act
-            var result = await rep.GetOneAsync(Guid.NewGuid());
+            var result = await _categoryRepository.GetOneAsync(Guid.NewGuid());
 
             //assert
             Assert.IsNull(result);
@@ -70,13 +68,11 @@ namespace Tests.DAL
             //arrange
             const string categoryName = "name";
             Guid categoryId = Guid.NewGuid();
-            libraryDBContext.Categories.Add(new Category() { Id = categoryId, Name = categoryName, Description = "Description1" });
-            libraryDBContext.SaveChanges();
-
-            CategoryRepository rep = new CategoryRepository(libraryDBContext, loggerMock.Object);
+            _libraryDBContext.Categories.Add(new Category() { Id = categoryId, Name = categoryName, Description = "Description1" });
+            _libraryDBContext.SaveChanges();
 
             //act
-            var result = await rep.GetOneAsync(categoryId);
+            var result = await _categoryRepository.GetOneAsync(categoryId);
 
             //assert
             Assert.IsNotNull(result);

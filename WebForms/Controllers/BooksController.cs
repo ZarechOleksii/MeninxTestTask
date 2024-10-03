@@ -30,7 +30,7 @@ namespace WebForms.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetBook([FromUri] Guid id)
+        public async Task<IHttpActionResult> GetBookAsync([FromUri] Guid id)
         {
             Book result = await _bookRepository.GetOneAsync(id);
 
@@ -63,7 +63,7 @@ namespace WebForms.Controllers
 
                     if (result)
                     {
-                        return Created(Url.Route("DefaultApi", new { id = book.Id }), book);
+                        return CreatedAtRoute(RouteConfig.RouteName, new { id = book.Id }, book);
                     }
 
                     return BadRequest();
@@ -74,7 +74,7 @@ namespace WebForms.Controllers
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> EditBook([FromUri] Guid id, [FromBody] Book book)
+        public async Task<IHttpActionResult> EditBookAsync([FromUri] Guid id, [FromBody] Book book)
         {
             if (!id.Equals(book.Id))
             {
@@ -104,7 +104,7 @@ namespace WebForms.Controllers
         }
 
         [HttpDelete]
-        public async Task<IHttpActionResult> DeleteBook([FromUri] Guid id)
+        public async Task<IHttpActionResult> DeleteBookAsync([FromUri] Guid id)
         {
             Book dbBook = await _bookRepository.GetOneAsync(id);
 
